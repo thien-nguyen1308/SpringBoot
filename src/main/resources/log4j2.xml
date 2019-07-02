@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <RollingRandomAccessFile name="InfoFile" fileName="C:/work/Log/info.log" immediateFlush="false" append="true"  filePattern="C:/work/Log/info-%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout>
+                <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{-10}.%M() @%L - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingRandomAccessFile>
+       
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout>
+                <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{-10}.%M() @%L - %msg%n</pattern>
+            </PatternLayout>        
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console" />
+        </Root>
+        <AsyncLogger name="com.faber" level="info" includeLocation="true">
+            <AppenderRef ref="InfoFile"/>
+        </AsyncLogger>
+    </Loggers>
+ 
+</Configuration>
